@@ -84,7 +84,7 @@ unsigned int freq;
  */
 unsigned char butnEvent(unsigned char *butn) {
 
-    if(PORTBbits.RB0 == 0) return BUTN1;                   // Etc
+    if(PORTBbits.RB0 == 0) return BUTN1;
     return 0;		// No changes
 }
 //
