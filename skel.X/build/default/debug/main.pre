@@ -6682,8 +6682,6 @@ const unsigned int regDflt[18] = {
 
 unsigned int regImg[18];
 
-unsigned int freq;
-
 # 85
 unsigned char butnEvent(unsigned char *butn) {
 
@@ -6764,8 +6762,10 @@ else *LCReg &= ~bitSelect;
 # 197
 unsigned char FMwrite(unsigned char adr) {
 
+unsigned int regstr;
 unsigned char firstByt;
 unsigned char secndByt;
+unsigned char rpy;
 
 firstByt = regImg[adr] >> 8;
 secndByt = regImg[adr];
@@ -6787,7 +6787,7 @@ IdleI2C();
 return 0;
 }
 
-# 239
+# 241
 unsigned char FMread(unsigned char regAddr, unsigned int *data) {
 
 unsigned char firstByt;
@@ -6822,7 +6822,7 @@ IdleI2C();
 return 0;
 }
 
-# 289
+# 291
 unsigned char FMready(unsigned int *rdy) {
 
 unsigned int sts;
@@ -6833,7 +6833,7 @@ sts &= 0x0020;
 return 0;
 }
 
-# 310
+# 312
 unsigned char FMinit() {
 
 unsigned char ad;
@@ -6857,7 +6857,7 @@ showFreq();
 return 0;
 }
 
-# 349
+# 351
 unsigned char FMfrequenc(unsigned int f) {
 
 unsigned int dat;
@@ -6875,8 +6875,6 @@ do {
 dly(2);
 if (FMready(&dat) != 0) return 1;
 } while (!dat);
-
-return 1;
 }
 
 # 383
@@ -6895,31 +6893,25 @@ return 0;
 # 420
 unsigned char nextChan(unsigned char up) {
 
-if(up){
 
 return 0;
-}else if(!up){
-
-return 0;
-}else return 1;
-
 }
 
-# 444
+# 438
 void errfm() {
 
 ;
 for(;;) ;
 }
 
-# 460
+# 454
 unsigned char showFreq() {
 
 ;
 return 0;
 }
 
-# 470
+# 464
 void main(void) {
 
 unsigned char btn;

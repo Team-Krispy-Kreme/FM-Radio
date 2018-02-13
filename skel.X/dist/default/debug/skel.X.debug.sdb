@@ -39,21 +39,21 @@
 [v _Init Init `(v  1 e 1 0 ]
 "197
 [v _FMwrite FMwrite `(uc  1 e 1 0 ]
-"239
+"241
 [v _FMread FMread `(uc  1 e 1 0 ]
-"289
+"291
 [v _FMready FMready `(uc  1 e 1 0 ]
-"310
+"312
 [v _FMinit FMinit `(uc  1 e 1 0 ]
 "383
 [v _FMvers FMvers `(uc  1 e 1 0 ]
 "420
 [v _nextChan nextChan `(uc  1 e 1 0 ]
-"444
+"438
 [v _errfm errfm `(v  1 e 1 0 ]
-"460
+"454
 [v _showFreq showFreq `(uc  1 e 1 0 ]
-"470
+"464
 [v _main main `(v  1 e 1 0 ]
 "50 C:\Program Files (x86)\Microchip\xc8\v1.45\include\pic18f6490.h
 [v _LCDPS LCDPS `VEuc  1 e 1 @3928 ]
@@ -81,7 +81,7 @@
 [v _TRISB TRISB `VEuc  1 e 1 @3987 ]
 "7106
 [v _TRISC TRISC `VEuc  1 e 1 @3988 ]
-[s S427 . 1 `uc 1 TRISC0 1 0 :1:0 
+[s S428 . 1 `uc 1 TRISC0 1 0 :1:0 
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -91,7 +91,7 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "7384
-[s S436 . 1 `uc 1 RC0 1 0 :1:0 
+[s S437 . 1 `uc 1 RC0 1 0 :1:0 
 `uc 1 RC1 1 0 :1:1 
 `uc 1 RC2 1 0 :1:2 
 `uc 1 RC3 1 0 :1:3 
@@ -100,11 +100,11 @@
 `uc 1 RC6 1 0 :1:6 
 `uc 1 RC7 1 0 :1:7 
 ]
-[u S445 . 1 `S427 1 . 1 0 `S436 1 . 1 0 ]
-[v _TRISCbits TRISCbits `VES445  1 e 1 @3988 ]
+[u S446 . 1 `S428 1 . 1 0 `S437 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES446  1 e 1 @3988 ]
 "7902
 [v _TRISG TRISG `VEuc  1 e 1 @3992 ]
-[s S626 . 1 `uc 1 TMR1IF 1 0 :1:0 
+[s S627 . 1 `uc 1 TMR1IF 1 0 :1:0 
 `uc 1 TMR2IF 1 0 :1:1 
 `uc 1 CCP1IF 1 0 :1:2 
 `uc 1 SSPIF 1 0 :1:3 
@@ -113,12 +113,12 @@
 `uc 1 ADIF 1 0 :1:6 
 ]
 "8448
-[s S634 . 1 `uc 1 . 1 0 :4:0 
+[s S635 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 TX1IF 1 0 :1:4 
 `uc 1 RC1IF 1 0 :1:5 
 ]
-[u S638 . 1 `S626 1 . 1 0 `S634 1 . 1 0 ]
-[v _PIR1bits PIR1bits `VES638  1 e 1 @3998 ]
+[u S639 . 1 `S627 1 . 1 0 `S635 1 . 1 0 ]
+[v _PIR1bits PIR1bits `VES639  1 e 1 @3998 ]
 "9859
 [v _ADCON1 ADCON1 `VEuc  1 e 1 @4033 ]
 [s S122 . 1 `uc 1 SEN 1 0 :1:0 
@@ -137,32 +137,32 @@
 [v _SSPCON2 SSPCON2 `VEuc  1 e 1 @4037 ]
 "10377
 [v _SSPCON1 SSPCON1 `VEuc  1 e 1 @4038 ]
-[s S599 . 1 `uc 1 SSPM 1 0 :4:0 
+[s S600 . 1 `uc 1 SSPM 1 0 :4:0 
 `uc 1 CKP 1 0 :1:4 
 `uc 1 SSPEN 1 0 :1:5 
 `uc 1 SSPOV 1 0 :1:6 
 `uc 1 WCOL 1 0 :1:7 
 ]
 "10397
-[s S605 . 1 `uc 1 SSPM0 1 0 :1:0 
+[s S606 . 1 `uc 1 SSPM0 1 0 :1:0 
 `uc 1 SSPM1 1 0 :1:1 
 `uc 1 SSPM2 1 0 :1:2 
 `uc 1 SSPM3 1 0 :1:3 
 ]
-[u S610 . 1 `S599 1 . 1 0 `S605 1 . 1 0 ]
-[v _SSPCON1bits SSPCON1bits `VES610  1 e 1 @4038 ]
+[u S611 . 1 `S600 1 . 1 0 `S606 1 . 1 0 ]
+[v _SSPCON1bits SSPCON1bits `VES611  1 e 1 @4038 ]
 "10446
 [v _SSPSTAT SSPSTAT `VEuc  1 e 1 @4039 ]
 "10464
 [v _SSPADD SSPADD `VEuc  1 e 1 @4040 ]
-[s S246 . 1 `uc 1 . 1 0 :2:0 
+[s S247 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_NOT_W 1 0 :1:2 
 ]
 "10548
-[s S249 . 1 `uc 1 . 1 0 :5:0 
+[s S250 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 D_NOT_A 1 0 :1:5 
 ]
-[s S252 . 1 `uc 1 BF 1 0 :1:0 
+[s S253 . 1 `uc 1 BF 1 0 :1:0 
 `uc 1 UA 1 0 :1:1 
 `uc 1 R_nW 1 0 :1:2 
 `uc 1 S 1 0 :1:3 
@@ -171,63 +171,63 @@
 `uc 1 CKE 1 0 :1:6 
 `uc 1 SMP 1 0 :1:7 
 ]
-[s S267 . 1 `uc 1 . 1 0 :2:0 
+[s S268 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R_W 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D_A 1 0 :1:5 
 ]
-[s S272 . 1 `uc 1 . 1 0 :2:0 
+[s S273 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 I2C_READ 1 0 :1:2 
 `uc 1 I2C_START 1 0 :1:3 
 `uc 1 I2C_STOP 1 0 :1:4 
 `uc 1 I2C_DAT 1 0 :1:5 
 ]
-[s S278 . 1 `uc 1 . 1 0 :2:0 
+[s S279 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nW 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nA 1 0 :1:5 
 ]
-[s S283 . 1 `uc 1 . 1 0 :2:0 
+[s S284 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_WRITE 1 0 :1:2 
 ]
-[s S286 . 1 `uc 1 . 1 0 :5:0 
+[s S287 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_ADDRESS 1 0 :1:5 
 ]
-[s S289 . 1 `uc 1 . 1 0 :2:0 
+[s S290 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 nWRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 nADDRESS 1 0 :1:5 
 ]
-[s S294 . 1 `uc 1 . 1 0 :2:0 
+[s S295 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 READ_WRITE 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 DATA_ADDRESS 1 0 :1:5 
 ]
-[s S299 . 1 `uc 1 . 1 0 :2:0 
+[s S300 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 R 1 0 :1:2 
 `uc 1 . 1 0 :2:3 
 `uc 1 D 1 0 :1:5 
 ]
-[s S304 . 1 `uc 1 . 1 0 :5:0 
+[s S305 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 DA 1 0 :1:5 
 ]
-[s S307 . 1 `uc 1 . 1 0 :2:0 
+[s S308 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 RW 1 0 :1:2 
 ]
-[s S310 . 1 `uc 1 . 1 0 :3:0 
+[s S311 . 1 `uc 1 . 1 0 :3:0 
 `uc 1 START 1 0 :1:3 
 ]
-[s S313 . 1 `uc 1 . 1 0 :4:0 
+[s S314 . 1 `uc 1 . 1 0 :4:0 
 `uc 1 STOP 1 0 :1:4 
 ]
-[s S316 . 1 `uc 1 . 1 0 :2:0 
+[s S317 . 1 `uc 1 . 1 0 :2:0 
 `uc 1 NOT_W 1 0 :1:2 
 ]
-[s S319 . 1 `uc 1 . 1 0 :5:0 
+[s S320 . 1 `uc 1 . 1 0 :5:0 
 `uc 1 NOT_A 1 0 :1:5 
 ]
-[u S322 . 1 `S246 1 . 1 0 `S249 1 . 1 0 `S252 1 . 1 0 `S246 1 . 1 0 `S249 1 . 1 0 `S267 1 . 1 0 `S272 1 . 1 0 `S278 1 . 1 0 `S283 1 . 1 0 `S286 1 . 1 0 `S289 1 . 1 0 `S294 1 . 1 0 `S299 1 . 1 0 `S304 1 . 1 0 `S307 1 . 1 0 `S310 1 . 1 0 `S313 1 . 1 0 `S316 1 . 1 0 `S319 1 . 1 0 ]
-[v _SSPSTATbits SSPSTATbits `VES322  1 e 1 @4039 ]
+[u S323 . 1 `S247 1 . 1 0 `S250 1 . 1 0 `S253 1 . 1 0 `S247 1 . 1 0 `S250 1 . 1 0 `S268 1 . 1 0 `S273 1 . 1 0 `S279 1 . 1 0 `S284 1 . 1 0 `S287 1 . 1 0 `S290 1 . 1 0 `S295 1 . 1 0 `S300 1 . 1 0 `S305 1 . 1 0 `S308 1 . 1 0 `S311 1 . 1 0 `S314 1 . 1 0 `S317 1 . 1 0 `S320 1 . 1 0 ]
+[v _SSPSTATbits SSPSTATbits `VES323  1 e 1 @4039 ]
 "10718
 [v _SSPBUF SSPBUF `VEuc  1 e 1 @4041 ]
 "11218
@@ -281,29 +281,26 @@
 [v _regDflt regDflt `C[18]ui  1 e 36 0 ]
 "69
 [v _regImg regImg `[18]ui  1 e 36 0 ]
-"470
+"464
 [v _main main `(v  1 e 1 0 ]
 {
-"474
+"468
 [v main@ui ui `ui  1 a 2 22 ]
-"472
+"466
 [v main@btn btn `uc  1 a 1 21 ]
-"473
+"467
 [v main@evt evt `uc  1 a 1 20 ]
-"491
+"485
 } 0
 "420
 [v _nextChan nextChan `(uc  1 e 1 0 ]
 {
-[v nextChan@up up `uc  1 a 1 wreg ]
-[v nextChan@up up `uc  1 a 1 wreg ]
-[v nextChan@up up `uc  1 a 1 0 ]
-"430
+"424
 } 0
-"444
+"438
 [v _errfm errfm `(v  1 e 1 0 ]
 {
-"448
+"442
 } 0
 "85
 [v _butnEvent butnEvent `(uc  1 e 1 0 ]
@@ -332,19 +329,19 @@
 [v FMvers@vsn vsn `*.39ui  1 p 2 11 ]
 "386
 } 0
-"310
+"312
 [v _FMinit FMinit `(uc  1 e 1 0 ]
 {
-"313
+"315
 [v FMinit@dat dat `ui  1 a 2 17 ]
-"312
+"314
 [v FMinit@ad ad `uc  1 a 1 19 ]
-"331
+"333
 } 0
-"460
+"454
 [v _showFreq showFreq `(uc  1 e 1 0 ]
 {
-"464
+"458
 } 0
 "94
 [v _dly dly `(v  1 e 1 0 ]
@@ -359,39 +356,39 @@
 [v _FMwrite FMwrite `(uc  1 e 1 0 ]
 {
 [v FMwrite@adr adr `uc  1 a 1 wreg ]
-"200
+"201
 [v FMwrite@secndByt secndByt `uc  1 a 1 5 ]
-"199
+"200
 [v FMwrite@firstByt firstByt `uc  1 a 1 4 ]
 "197
 [v FMwrite@adr adr `uc  1 a 1 wreg ]
-"202
+"204
 [v FMwrite@adr adr `uc  1 a 1 6 ]
-"220
+"222
 } 0
-"289
+"291
 [v _FMready FMready `(uc  1 e 1 0 ]
 {
-"291
+"293
 [v FMready@sts sts `ui  1 a 2 15 ]
-"289
+"291
 [v FMready@rdy rdy `*.39ui  1 p 2 11 ]
-"297
+"299
 } 0
-"239
+"241
 [v _FMread FMread `(uc  1 e 1 0 ]
 {
 [v FMread@regAddr regAddr `uc  1 a 1 wreg ]
-"242
+"244
 [v FMread@secndByt secndByt `uc  1 a 1 10 ]
-"241
+"243
 [v FMread@firstByt firstByt `uc  1 a 1 9 ]
-"239
+"241
 [v FMread@regAddr regAddr `uc  1 a 1 wreg ]
 [v FMread@data data `*.39ui  1 p 2 2 ]
-"244
+"246
 [v FMread@regAddr regAddr `uc  1 a 1 8 ]
-"271
+"273
 } 0
 "12 C:\Program Files (x86)\Microchip\xc8\v1.45\sources\pic18\plib\i2c\i2c_writ.c
 [v _WriteI2C WriteI2C `(c  1 e 1 0 ]
