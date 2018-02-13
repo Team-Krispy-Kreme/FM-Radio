@@ -420,10 +420,10 @@ unsigned char FMid(unsigned int *id) {
 unsigned char nextChan(unsigned char up) {
 
     if(up){
-        
+        freq += 1;
         return XS;
     }else if(!up){
-        
+        freq += 1;
         return XS;
     }else return XF;
     
@@ -486,7 +486,7 @@ void main(void) {
             case BUTN3 : ; break;
 			case BUTN8 : errfm(); break;
 			default : break;
-		}
+        }
 	}
 }
 //
