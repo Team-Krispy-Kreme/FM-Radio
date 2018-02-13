@@ -434,8 +434,8 @@ unsigned char FMid(unsigned int *id) {
 /*
  * nextChan() -  Tune to the next channel.
  *
- * @param up Set to non-zero for next channel up,
- *  zero for preset down.
+ * @param up Set to non-zero for frequency increase,
+ *  zero for frequency down.
  *
  * @return XS on success or XF on error.
  *
@@ -463,9 +463,34 @@ unsigned char nextChan(unsigned char up) {
 //
 
 
+/*
+ * scan Next() -  Tune to the next channel.
+ *
+ * @param up Set to non-zero for next channel up,
+ *  zero for preset down.
+ *
+ * @return XS on success or XF on error.
+ *
+ */
+unsigned char scanNext(unsigned char up){
+    
+    if(up){
+        
+    }else if(!up){
+        
+    }else return XF;
+    
+}
+
+//
+// end scanNext ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//
+//
+
 unsigned char FMreadChan(){
     unsigned char newFreq;
     FMread(2,&newFreq);
+    freq = newFreq;
 }
 
 /*
