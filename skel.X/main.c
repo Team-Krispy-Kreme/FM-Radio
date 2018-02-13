@@ -84,7 +84,7 @@ unsigned int freq;
  */
 unsigned char butnEvent(unsigned char *butn) {
 
-    ;                   // Etc
+    if(PORTBbits.RB0 == 0) return BUTN1;                   // Etc
     return 0;		// No changes
 }
 //
@@ -439,6 +439,11 @@ unsigned char nextChan(unsigned char up) {
 //
 //
 
+
+unsigned char FMreadChan(){
+    unsigned char newFreq;
+    FMread(2,&newFreq);
+}
 
 /*
  * errfm() -  Firmware error.   Call this on a showstopper.
