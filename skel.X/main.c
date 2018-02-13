@@ -421,9 +421,11 @@ unsigned char nextChan(unsigned char up) {
 
     if(up){
         freq += 1;
+        FMfrequenc(freq);
         return XS;
     }else if(!up){
         freq += 1;
+        FMfrequenc(freq);
         return XS;
     }else return XF;
     
