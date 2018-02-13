@@ -48,7 +48,7 @@
 const unsigned int regDflt[18] = {
 	0xFFFF,     // R0 -- the first writable register .  (disable xo_en)   
 	0x5B15,     // R1.   
-	0xD0B9,     // R2.   
+	0xD0B9,     // R2.   Digit 9 is TUNE
 	0xA010,     // R3   seekTHD = 16   
 	0x0780,     // R4   
 	0x28AB,     // R5   
@@ -68,7 +68,7 @@ const unsigned int regDflt[18] = {
 
 unsigned int regImg[18];	// FM register bank images
 
-
+unsigned int freq;
 
 
 
@@ -158,7 +158,7 @@ void Init() {
 /*
  * Write an individual LCD segment.  
  *
- * @param segOrd The segment ordinal.  Between 0 and 22.
+ * @param segOrd The segment ordinal.  Between 0 and 23.
  *
  * @param state Whether to turn the segment dark (true) or clear (false).
  *
@@ -196,10 +196,8 @@ void segWrt(unsigned char segOrd,  unsigned char state) {
  */
 unsigned char FMwrite(unsigned char adr) {
 
-	unsigned int  regstr;
 	unsigned char firstByt;
 	unsigned char secndByt;
-	unsigned char rpy;
 
 	firstByt = regImg[adr] >> 8;
 	secndByt = regImg[adr];
@@ -365,6 +363,8 @@ unsigned char FMfrequenc(unsigned int f) {
 		dly(2);
 		if (FMready(&dat) != XS) return XF;
 	} while (!dat);
+    
+    return XS;
 }
 //
 // end FMfrequenc ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -492,5 +492,3 @@ void main(void) {
 //
 // end main ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
-//test
-
