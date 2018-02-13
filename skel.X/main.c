@@ -158,7 +158,7 @@ void Init() {
 /*
  * Write an individual LCD segment.  
  *
- * @param segOrd The segment ordinal.  Between 0 and 22.
+ * @param segOrd The segment ordinal.  Between 0 and 23.
  *
  * @param state Whether to turn the segment dark (true) or clear (false).
  *
