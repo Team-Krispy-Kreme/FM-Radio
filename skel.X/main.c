@@ -439,6 +439,15 @@ unsigned char nextChan(unsigned char up) {
 //
 //
 
+unsigned char scanNext(unsigned char up){
+    
+    if(up){
+        
+    }else if(!up){
+        
+    }else return XF;
+    
+}
 
 unsigned char FMreadChan(){
     unsigned char newFreq;
