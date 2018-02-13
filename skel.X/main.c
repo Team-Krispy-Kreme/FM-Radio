@@ -68,7 +68,7 @@ const unsigned int regDflt[18] = {
 
 unsigned int regImg[18];	// FM register bank images
 
-
+unsigned int freq;
 
 
 
