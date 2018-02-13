@@ -420,13 +420,17 @@ unsigned char FMid(unsigned int *id) {
 unsigned char nextChan(unsigned char up) {
 
     if(up){
-        freq += 1;
-        FMfrequenc(freq);
-        return XS;
+        if((freq + 1)<= FMHIGHCHAN){
+            freq += 1;
+            FMfrequenc(freq);
+            return XS;
+        }
     }else if(!up){
-        freq += 1;
-        FMfrequenc(freq);
-        return XS;
+        if((freq - 1)<= FMLOWCHAN){
+            freq -= 1;
+            FMfrequenc(freq);
+            return XS;
+        }
     }else return XF;
     
 }
