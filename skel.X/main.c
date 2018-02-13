@@ -84,7 +84,30 @@ unsigned int freq;
  */
 unsigned char butnEvent(unsigned char *butn) {
 
-    if(PORTBbits.RB0 == 0) return BUTN1;                   // Etc
+    if(PORTBbits.RB0 == 0) //if button 1 pressed
+        return BUTN1; 
+    
+    if (PORTBbits.RB5 == 0) //button 2 pressed
+        return BUTN2;
+    
+    if (PORTAbits.RA0 == 0) //button 3 pressed
+        return BUTN3;
+    
+    if (PORTAbits.RA1 == 0) //button 4 pressed
+        return BUTN4;
+    
+    if (PORTGbits.RG0 == 0) //button 5 pressed
+        return BUTN5;
+    
+    if (PORTGbits.RG1 == 0) //button 6 pressed
+        return BUTN6;
+    
+    if (PORTGbits.RG2 == 0) //button 7 pressed
+        return BUTN7;
+    
+    if (PORTGbits.RG3 == 0) //button 8 pressed
+        return BUTN8;
+    
     return 0;		// No changes
 }
 //
