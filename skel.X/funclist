@@ -1,0 +1,19 @@
+_errfm: CODE, 1940 0 2
+_butnEvent: CODE, 1936 0 4
+_FMread: CODE, 806 0 218
+_IdleI2C: CODE, 1924 0 12
+_regDflt: SMALLCONST, 768 0 36
+_showFreq: CODE, 1944 0 2
+_main: CODE, 1498 0 114
+_FMready: CODE, 1698 0 76
+_FMvers: CODE, 1902 0 22
+_FMinit: CODE, 1024 0 216
+__initialization: CODE, 1880 0 12
+_nextChan: CODE, 1942 0 2
+_dly: CODE, 1774 0 50
+_Init: CODE, 1380 0 118
+_ReadI2C: CODE, 1824 0 28
+_WriteI2C: CODE, 1612 0 86
+_FMwrite: CODE, 1240 0 140
+_OpenI2C: CODE, 1852 0 28
+Total: 1166
