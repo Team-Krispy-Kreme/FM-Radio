@@ -457,10 +457,11 @@ void errfm() {
  */
 unsigned char showFreq(unsigned int frequency) {
 
-    int count, i;
+    int count, i num = 10;
     
     clrscn();
-    // count no of digits
+    segWrt(22, TRUE);
+    
     while(frequency != 0)
     {
         frequency /= 10;
@@ -475,10 +476,9 @@ unsigned char showFreq(unsigned int frequency) {
     
     for (i = 1; i++; i<=count)
     {
-        int num = 10, digit;
+        int digit;
         
         (frequency/num)%10 = digit;
-        
         createDigit(digit, i);
         num = num*10;
     }
@@ -496,7 +496,7 @@ unsigned char showFreq(unsigned int frequency) {
 void createDigit(unsigned int digit, unsigned char seg){
     
     int a, b, c, d, e, f, g;
-    if (seg = 1)
+    if (seg = 3)
     { 
         a = 0;
         b = 1;
@@ -518,7 +518,7 @@ void createDigit(unsigned int digit, unsigned char seg){
         g = 13;
     }
     
-    if (seg = 3)
+    if (seg = 1)
     { 
         a = 14;
         b = 15;
