@@ -154,7 +154,6 @@ void Init() {
 // end Init ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 
-
 /*
  * Write an individual LCD segment.  
  *
@@ -177,7 +176,6 @@ void segWrt(unsigned char segOrd,  unsigned char state) {
 //
 // end segWrt ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
-
 
 
 
@@ -457,14 +455,165 @@ void errfm() {
  * @return XS if successful, else XF on failure.
  *
  */
-unsigned char showFreq() {
+unsigned char showFreq(unsigned int frequency) {
 
+    int count, i;
+    
+    clrscn();
+    // count no of digits
+    while(frequency != 0)
+    {
+        frequency /= 10;
+        ++count;
+    }
+    
+    if (count == 4)
+    {
+        segWrt(21, TRUE);
+        count--;
+    }
+    
+    for (i = 1; i++; i<=count)
+    {
+        int num = 10, digit;
+        
+        (frequency/num)%10 = digit;
+        
+        createDigit(digit, i);
+        num = num*10;
+    }
+    
     ;		// Etc
     return XS;
 }
-//
+// int freq1 freq2
+//  freq1 = frequency; freq2 = frequency/10
+//  freq1 -= freq2*10
 // end showFreq ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
+
+
+void createDigit(unsigned int digit, unsigned char seg){
+    
+    int a, b, c, d, e, f, g;
+    if (seg = 1)
+    { 
+        a = 0;
+        b = 1;
+        c = 2;
+        d = 3;
+        e = 4;
+        f = 5;
+        g = 6;
+    }
+    
+    if (seg = 2)
+    { 
+        a = 7;
+        b = 8;
+        c = 9;
+        d = 10;
+        e = 11;
+        f = 12;
+        g = 13;
+    }
+    
+    if (seg = 3)
+    { 
+        a = 14;
+        b = 15;
+        c = 16;
+        d = 17;
+        e = 18;
+        f = 19;
+        g = 20;
+    }
+    
+    if (digit == 0)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(c, TRUE);
+        segWrt(d, TRUE);
+        segWrt(e, TRUE);
+        segWrt(f, TRUE);  
+    }
+    
+    if (digit == 1)
+    {
+        segWrt(b, TRUE);
+        segWrt(c, TRUE);
+    }
+    
+    if (digit == 2)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(g, TRUE);
+        segWrt(e, TRUE);
+        segWrt(g, TRUE);
+    }
+    if (digit == 3)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(g, TRUE);
+        segWrt(c, TRUE);
+        segWrt(d, TRUE);
+    }
+    if (digit == 4)
+    {
+        segWrt(f, TRUE);
+        segWrt(g, TRUE);
+        segWrt(b, TRUE);
+        segWrt(c, TRUE);
+    }
+    
+    if (digit == 5)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(g, TRUE);
+        segWrt(e, TRUE);
+        segWrt(d, TRUE);
+    }
+    
+    if (digit == 6)
+    {
+        segWrt(a, TRUE);
+        segWrt(f, TRUE);
+        segWrt(g, TRUE);
+        segWrt(e, TRUE);
+        segWrt(c, TRUE);
+        segWrt(d, TRUE);
+    }
+    if (digit == 7)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(c, TRUE);
+    }
+    
+    if (digit == 8)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(c, TRUE);
+        segWrt(d, TRUE);
+        segWrt(e, TRUE);
+        segWrt(f, TRUE);
+        segWrt(g, TRUE);
+    }
+    
+    if (digit == 9)
+    {
+        segWrt(a, TRUE);
+        segWrt(b, TRUE);
+        segWrt(c, TRUE);
+        segWrt(f, TRUE);
+        segWrt(g, TRUE);
+    }
+}
 
 
 void main(void) {
