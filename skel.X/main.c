@@ -119,7 +119,7 @@ void dly(int d) {
 	int i = 0;
 
 	for ( ; d; --d) 
-		for (i = 100;  i;  --i) ;
+		for (i = 1000;  i;  --i) ;
 }
 //
 // end dly ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -507,7 +507,7 @@ void main(void) {
 	unsigned char evt;
 	unsigned int ui;
 
-	dly(20);
+	dly(2);
 	Init();
 	FMvers(&ui);									// Check we have comms with FM chip
 	if (ui != 0x1010) errfm();
@@ -515,11 +515,15 @@ void main(void) {
 	for (;;) {
 		evt = butnEvent(&btn);
 		if (evt == 1) switch (btn) {
-			case BUTN1 : nextChan(TRUE); break;
-            case BUTN2 : nextChan(FALSE); break;
-            case BUTN3 : ; break;
-			case BUTN8 : errfm(); break;
-			default : break;
+			case BUTN1 : nextChan(TRUE); dly(750); break; //if it screws up then 750 too big for int (change d to long int in dly function)
+            case BUTN2 : nextChan(FALSE); dly(750); break;
+            case BUTN3 : ; dly(750); break;
+            case BUTN4 : ; dly(750); break;
+            case BUTN5 : ; dly(750); break;
+            case BUTN6 : ; dly(750); break;
+            case BUTN7 : ; dly(750); break;
+			case BUTN8 : errfm(); dly(750); break;
+			default : dly(750); break;
         }
 	}
 }
