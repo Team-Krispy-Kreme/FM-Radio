@@ -141,12 +141,12 @@ void Init() {
 	PORTA = 0;
 	PORTB = 0;
 	PORTC = 0;
-    INTCONbits.TMR0IF = 0;          // Clear timer flag
+    INTCON.TMR0IF = 0;          // Clear timer flag
 	//T0CON = 0b00000011;				// Prescale by 16
     T0CON = 0b00001000;             // No prescale
     TMR0H = 0;                      // Clear timer count
     TMR0L = 0;
-    T0CONbits.TMR0ON = 1;           // Start timer
+    T0CON.TMR0ON = 1;           // Start timer
 	OpenI2C( MASTER, SLEW_OFF);
 	SSPADD = 0x3F;
 }
