@@ -363,6 +363,8 @@ unsigned char FMfrequenc(unsigned int f) {
 		dly(2);
 		if (FMready(&dat) != XS) return XF;
 	} while (!dat);
+    
+    return XF;
 }
 //
 // end FMfrequenc ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
