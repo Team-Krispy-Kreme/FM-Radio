@@ -196,10 +196,8 @@ void segWrt(unsigned char segOrd,  unsigned char state) {
  */
 unsigned char FMwrite(unsigned char adr) {
 
-	unsigned int  regstr;
 	unsigned char firstByt;
 	unsigned char secndByt;
-	unsigned char rpy;
 
 	firstByt = regImg[adr] >> 8;
 	secndByt = regImg[adr];
