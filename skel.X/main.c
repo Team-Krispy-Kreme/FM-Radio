@@ -426,7 +426,7 @@ unsigned char nextChan(unsigned char up) {
             return XS;
         }
     }else if(!up){
-        if((freq - 1)<= FMLOWCHAN){
+        if((freq - 1)>= FMLOWCHAN){
             freq -= 1;
             FMfrequenc(freq);
             return XS;
