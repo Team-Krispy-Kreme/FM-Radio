@@ -489,7 +489,8 @@ unsigned char scanNext(unsigned char up){
 
 unsigned char FMreadChan(){
     unsigned char newFreq;
-    FMread(2,&newFreq);
+    FMread(13,&newFreq);
+    newFreq &= FMASKRDCHAN;
     freq = newFreq;
 }
 
