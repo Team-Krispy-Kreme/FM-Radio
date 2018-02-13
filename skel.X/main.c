@@ -419,8 +419,14 @@ unsigned char FMid(unsigned int *id) {
  */
 unsigned char nextChan(unsigned char up) {
 
-    // Etc.
-    return XS;
+    if(up){
+        
+        return XS;
+    }else if(!up){
+        
+        return XS;
+    }else return XF;
+    
 }
 //
 // end nextChan ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
