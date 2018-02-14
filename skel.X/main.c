@@ -445,21 +445,17 @@ unsigned char nextChan(unsigned char up) {
     if(up){
         if((freq + 1)<= FMHIGHCHAN){
             freq += 1;
-            regImg[1] |= FMASKMUTE;
-            FMwrite(1);
+            mute(TRUE);
             FMfrequenc(freq);
-            regImg[1] &= ~FMASKMUTE;
-            FMwrite(1);
+            mute(FALSE);
             return XS;
         }
     }else if(!up){
         if((freq - 1)>= FMLOWCHAN){
             freq -= 1;
-            regImg[1] |= FMASKMUTE;
-            FMwrite(1);
+            mute(TRUE);
             FMfrequenc(freq);
-            regImg[1] &= ~FMASKMUTE;
-            FMwrite(1);
+            mute(FALSE);
             return XS;
         }
     }else return XF;
@@ -472,7 +468,7 @@ unsigned char nextChan(unsigned char up) {
 
 
 /*
- * scan Next() -  Tune to the next channel.
+ * scanNext() -  Tune to the next channel.
  *
  * @param up Set to non-zero for next channel up,
  *  zero for preset down.
@@ -516,6 +512,29 @@ void errfm() {
 }
 //
 // end errfm ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//
+//
+
+
+/*
+ * mute() -  Firmware error.   Call this on a showstopper.
+ *
+ * @param mute whether to mute or unmute the device
+ *
+ * @return success or failure
+ *
+ */
+unsigned char mute(char mute) {
+    if(mute){
+        regImg[1] |= FMASKMUTE;
+        return FMwrite(1);
+    }else{
+        regImg[1] &= ~FMASKMUTE;
+        return FMwrite(1);
+    }	
+}
+//
+// end mute ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 //
 
