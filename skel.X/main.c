@@ -445,13 +445,21 @@ unsigned char nextChan(unsigned char up) {
     if(up){
         if((freq + 1)<= FMHIGHCHAN){
             freq += 1;
+            regImg[1] |= FMASKMUTE;
+            FMwrite(1);
             FMfrequenc(freq);
+            regImg[1] &= ~FMASKMUTE;
+            FMwrite(1);
             return XS;
         }
     }else if(!up){
         if((freq - 1)>= FMLOWCHAN){
             freq -= 1;
+            regImg[1] |= FMASKMUTE;
+            FMwrite(1);
             FMfrequenc(freq);
+            regImg[1] &= ~FMASKMUTE;
+            FMwrite(1);
             return XS;
         }
     }else return XF;
