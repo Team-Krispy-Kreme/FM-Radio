@@ -84,29 +84,45 @@ unsigned int freq;
  */
 unsigned char butnEvent(unsigned char *butn) {
 
-    if(PORTBbits.RB0 == 0) //if button 1 pressed
-        return BUTN1; 
+    if(PORTBbits.RB0 == 0){ //if button 1 pressed
+        *butn = BUTN1;
+        return XS;
+    }
     
-    if (PORTBbits.RB5 == 0) //button 2 pressed
-        return BUTN2;
+    if (PORTBbits.RB5 == 0){ //button 2 pressed
+        *butn = BUTN2;
+        return XS;
+    }
     
-    if (PORTAbits.RA0 == 0) //button 3 pressed
-        return BUTN3;
+    if (PORTAbits.RA0 == 0){ //button 3 pressed
+        *butn = BUTN3;
+        return XS;
+    }
     
-    if (PORTAbits.RA1 == 0) //button 4 pressed
-        return BUTN4;
+    if (PORTAbits.RA1 == 0){ //button 4 pressed
+        *butn = BUTN4;
+        return XS;
+    }   
     
-    if (PORTGbits.RG0 == 0) //button 5 pressed
-        return BUTN5;
+    if (PORTGbits.RG0 == 0){ //button 5 pressed
+        *butn = BUTN5;
+        return XS;
+    }
     
-    if (PORTGbits.RG1 == 0) //button 6 pressed
-        return BUTN6;
+    if (PORTGbits.RG1 == 0){ //button 6 pressed
+        *butn = BUTN6;
+        return XS;
+    }
     
-    if (PORTGbits.RG2 == 0) //button 7 pressed
-        return BUTN7;
+    if (PORTGbits.RG2 == 0){ //button 7 pressed
+        *butn = BUTN7;
+        return XS;
+    }
     
-    if (PORTGbits.RG3 == 0) //button 8 pressed
-        return BUTN8;
+    if (PORTGbits.RG3 == 0){ //button 8 pressed
+        *butn = BUTN8;
+        return XS;
+    }
     
     return 0;		// No changes
 }
