@@ -511,7 +511,6 @@ unsigned char FMreadChan(){
     unsigned int newFreq = 0;
     FMread(13,&newFreq);
     newFreq &= FMASKRDCHAN;
-    freq = newFreq;
     return XS;
 }
 
