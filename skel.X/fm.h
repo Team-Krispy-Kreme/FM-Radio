@@ -73,8 +73,10 @@ unsigned char FMwrite(unsigned char adr);				// Write a new value to a register
 unsigned char FMinit();									// Initialise the chip
 unsigned char FMready(unsigned int *rdy);				// Status is ready or busy
 unsigned char FMid(unsigned int *id);					// Obtain ID number
-unsigned char showFreq(void);						// Display the current f in MHz
+unsigned char showFreq(unsigned int frequency);						// Display the current f in MHz
 unsigned char FMvers(unsigned int *vsn);				// Obtain version number
+unsigned char mute(char mute);
+void createDigit(unsigned int digit, unsigned char seg);
 
 
 
