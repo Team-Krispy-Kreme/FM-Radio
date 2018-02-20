@@ -239,7 +239,8 @@ unsigned char FMwrite(unsigned char adr) {
 	IdleI2C();
 	return XS;
 }
-//
+/
+/
 // end FMwrite ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 //
@@ -544,7 +545,7 @@ unsigned char mute(char mute) {
  */
 unsigned char showFreq(unsigned int frequency) {
 
-    int count, i num = 10;
+    int count, i, num = 10;
     
     clrscn();
     segWrt(22, TRUE);
@@ -583,7 +584,7 @@ unsigned char showFreq(unsigned int frequency) {
 void createDigit(unsigned int digit, unsigned char seg){
     
     int a, b, c, d, e, f, g;
-    if (seg = 3)
+    if (seg == 3)
     { 
         a = 0;
         b = 1;
@@ -594,7 +595,7 @@ void createDigit(unsigned int digit, unsigned char seg){
         g = 6;
     }
     
-    if (seg = 2)
+    if (seg == 2)
     { 
         a = 7;
         b = 8;
@@ -605,7 +606,7 @@ void createDigit(unsigned int digit, unsigned char seg){
         g = 13;
     }
     
-    if (seg = 1)
+    if (seg == 1)
     { 
         a = 14;
         b = 15;
