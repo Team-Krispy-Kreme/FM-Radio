@@ -733,7 +733,10 @@ void main(void) {
             
         }
         clrscn();
-        segWrt(20, TRUE);
+        int x;
+        for(x = 0; x < 23;x++){
+            segWrt(x, TRUE);
+        }
 	}
 }
 //
