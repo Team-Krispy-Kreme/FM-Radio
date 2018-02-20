@@ -84,7 +84,30 @@ unsigned int freq;
  */
 unsigned char butnEvent(unsigned char *butn) {
 
-    ;                   // Etc
+    if(PORTBbits.RB0 == 0) //if button 1 pressed
+        return BUTN1; 
+    
+    if (PORTBbits.RB5 == 0) //button 2 pressed
+        return BUTN2;
+    
+    if (PORTAbits.RA0 == 0) //button 3 pressed
+        return BUTN3;
+    
+    if (PORTAbits.RA1 == 0) //button 4 pressed
+        return BUTN4;
+    
+    if (PORTGbits.RG0 == 0) //button 5 pressed
+        return BUTN5;
+    
+    if (PORTGbits.RG1 == 0) //button 6 pressed
+        return BUTN6;
+    
+    if (PORTGbits.RG2 == 0) //button 7 pressed
+        return BUTN7;
+    
+    if (PORTGbits.RG3 == 0) //button 8 pressed
+        return BUTN8;
+    
     return 0;		// No changes
 }
 //
@@ -96,7 +119,7 @@ void dly(int d) {
 	int i = 0;
 
 	for ( ; d; --d) 
-		for (i = 100;  i;  --i) ;
+		for (i = 1000;  i;  --i) ;
 }
 //
 // end dly ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -409,8 +432,8 @@ unsigned char FMid(unsigned int *id) {
 /*
  * nextChan() -  Tune to the next channel.
  *
- * @param up Set to non-zero for next channel up,
- *  zero for preset down.
+ * @param up Set to non-zero for frequency increase,
+ *  zero for frequency down.
  *
  * @return XS on success or XF on error.
  *
@@ -418,11 +441,25 @@ unsigned char FMid(unsigned int *id) {
 unsigned char nextChan(unsigned char up) {
 
     if(up){
-        
-        return XS;
+        if((freq + 1)<= FMHIGHCHAN){
+            freq += 1;
+            regImg[1] |= FMASKMUTE;
+            FMwrite(1);
+            FMfrequenc(freq);
+            regImg[1] &= ~FMASKMUTE;
+            FMwrite(1);
+            return XS;
+        }
     }else if(!up){
-        
-        return XS;
+        if((freq - 1)>= FMLOWCHAN){
+            freq -= 1;
+            regImg[1] |= FMASKMUTE;
+            FMwrite(1);
+            FMfrequenc(freq);
+            regImg[1] &= ~FMASKMUTE;
+            FMwrite(1);
+            return XS;
+        }
     }else return XF;
     
 }
@@ -431,6 +468,37 @@ unsigned char nextChan(unsigned char up) {
 //
 //
 
+
+/*
+ * scan Next() -  Tune to the next channel.
+ *
+ * @param up Set to non-zero for next channel up,
+ *  zero for preset down.
+ *
+ * @return XS on success or XF on error.
+ *
+ */
+unsigned char scanNext(unsigned char up){
+    
+    if(up){
+        
+    }else if(!up){
+        
+    }else return XF;
+    
+}
+
+//
+// end scanNext ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+//
+//
+
+unsigned char FMreadChan(){
+    unsigned char newFreq;
+    FMread(13,&newFreq);
+    newFreq &= FMASKRDCHAN;
+    freq = newFreq;
+}
 
 /*
  * errfm() -  Firmware error.   Call this on a showstopper.
@@ -622,7 +690,7 @@ void main(void) {
 	unsigned char evt;
 	unsigned int ui;
 
-	dly(20);
+	dly(2);
 	Init();
 	FMvers(&ui);									// Check we have comms with FM chip
 	if (ui != 0x1010) errfm();
@@ -630,12 +698,16 @@ void main(void) {
 	for (;;) {
 		evt = butnEvent(&btn);
 		if (evt == 1) switch (btn) {
-			case BUTN1 : nextChan(TRUE); break;
-            case BUTN2 : nextChan(FALSE); break;
-            case BUTN3 : ; break;
-			case BUTN8 : errfm(); break;
-			default : break;
-		}
+			case BUTN1 : nextChan(TRUE); dly(750); break; //if it screws up then 750 too big for int (change d to long int in dly function)
+            case BUTN2 : nextChan(FALSE); dly(750); break;
+            case BUTN3 : ; dly(750); break;
+            case BUTN4 : ; dly(750); break;
+            case BUTN5 : ; dly(750); break;
+            case BUTN6 : ; dly(750); break;
+            case BUTN7 : ; dly(750); break;
+			case BUTN8 : errfm(); dly(750); break;
+			default : dly(750); break;
+        }
 	}
 }
 //
