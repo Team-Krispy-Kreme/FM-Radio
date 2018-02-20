@@ -744,7 +744,7 @@ void main(void) {
             case BUTN6 : ; dly(750); break;
             case BUTN7 : ; dly(750); break;
 			case BUTN8 : errfm(); dly(750); break;
-			default : dly(750); break;
+			default : break;
             
             
         }
