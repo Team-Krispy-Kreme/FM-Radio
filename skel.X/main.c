@@ -730,9 +730,9 @@ void main(void) {
 
 	dly(2);
 	Init();
-	FMvers(&ui);									// Check we have comms with FM chip
-	if (ui != 0x1010) errfm();
-	if (FMinit() != XS) errfm();
+	//FMvers(&ui);									// Check we have comms with FM chip
+	//if (ui != 0x1010) errfm();
+	//if (FMinit() != XS) errfm();
 	for (;;) {
 		evt = butnEvent(&btn);
 		if (evt == 1) switch (btn) {
@@ -748,11 +748,14 @@ void main(void) {
             
             
         }
-        clrscn();
-        int x;
+        
+        /*int x;
         for(x = 0; x < 23;x++){
             segWrt(x, TRUE);
         }
+        */
+        
+        createDigit(8,1);
         
         PORTFbits.RF5 = 1;
 	}
