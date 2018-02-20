@@ -239,8 +239,7 @@ unsigned char FMwrite(unsigned char adr) {
 	IdleI2C();
 	return XS;
 }
-/
-/
+//
 // end FMwrite ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 //
@@ -348,7 +347,7 @@ unsigned char FMinit() {
 	if (FMwrite(0) != XS) return XF;
 	dly(20);
 	while (FMready(&dat), !dat) dly(2);
-	showFreq();
+	showFreq(freq);
 	return XS;
 }
 //
@@ -457,7 +456,8 @@ unsigned char nextChan(unsigned char up) {
             mute(FALSE);
             return XS;
         }
-    }else return XF;
+    }
+    return XF;
     
 }
 //
@@ -481,7 +481,8 @@ unsigned char scanNext(unsigned char up){
         
     }else if(!up){
         
-    }else return XF;
+    }
+    return XF;
     
 }
 
@@ -491,10 +492,11 @@ unsigned char scanNext(unsigned char up){
 //
 
 unsigned char FMreadChan(){
-    unsigned char newFreq;
+    unsigned int newFreq = 0;
     FMread(13,&newFreq);
     newFreq &= FMASKRDCHAN;
     freq = newFreq;
+    return XS;
 }
 
 /*
@@ -545,7 +547,7 @@ unsigned char mute(char mute) {
  */
 unsigned char showFreq(unsigned int frequency) {
 
-    int count, i, num = 10;
+    int count = 0, i, num = 10;
     
     clrscn();
     segWrt(22, TRUE);
@@ -566,7 +568,7 @@ unsigned char showFreq(unsigned int frequency) {
     {
         int digit;
         
-        (frequency/num)%10 = digit;
+        digit = (frequency/num)%10;
         createDigit(digit, i);
         num = num*10;
     }
