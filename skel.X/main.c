@@ -84,60 +84,60 @@ unsigned int freq;
  * Returns 2 if button released
  *
  */
-unsigned char butnEvent(unsigned char *butn) 
+unsigned char butnEvent(unsigned char *btn) 
 {
     if (PORTBbits.RB0 == 0)
     {
-        btn = BUTN1;
+        *btn = BUTN1;
         dly(100);
         return 1;
     }
     
     if (PORTBbits.RB5 == 0)
     {
-        btn = BUTN2;
+        *btn = BUTN2;
         dly(100);
         return 1;
     }
     
     if (PORTAbits.RA0 == 0)
     {
-       btn = BUTN3;
+        *btn = BUTN3;
         dly(100);
         return 1;
     }
     
     if (PORTAbits.RA1 == 0)
     {
-        btn = BUTN4;
+        *btn = BUTN4;
         dly(100);
         return 1;
     }
     
     if (PORTGbits.RG0 == 0)
     {
-        btn = BUTN5;
+        *btn = BUTN5;
         dly(100);
         return 1;
     }
     
     if (PORTGbits.RG1 == 0)
     {
-        btn = BUTN6;
+        *btn = BUTN6;
         dly(100);
         return 1;
     }
     
     if (PORTGbits.RG2 == 0)
     {
-        btn = BUTN7;
+        *btn = BUTN7;
         dly(100);
         return 1;
     }
     
     if (PORTGbits.RG3 == 0)
     {
-        btn = BUTN8;
+        *btn = BUTN8;
         dly(100);
         return 1;
     }
@@ -200,6 +200,7 @@ void Init() {
 	PORTA = 0;
 	PORTB = 0;
 	PORTC = 0;
+    PORTG = 0;
     INTCONbits.TMR0IF = 0;          // Clear timer flag
 	//T0CON = 0b00000011;				// Prescale by 16
     T0CON = 0b00001000;             // No prescale
