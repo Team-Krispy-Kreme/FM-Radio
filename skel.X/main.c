@@ -77,30 +77,80 @@ unsigned int freq;
  *
  * @param butn Which button changed.  See fm.h.
  *
- * @return 	0 if no button has changed state,
- *			1 if button is pushed,
- *			2 if button is released.
+ * Returns 0 if nothing changed
+ * 
+ * Returns 1 if button pressed
+ * 
+ * Returns 2 if button released
  *
  */
 unsigned char butnEvent(unsigned char *butn) 
 {
-    butn = 0b00000000;
+    if (PORTBbits.RB0 == 0)
+    {
+        btn = BUTN1;
+        dly(100);
+        return 1;
+    }
     
-    butn |= BUTN1; // if BUTN1 pressed, butn will have 1 in bit 0
-    butn |= BUTN2; // if BUTN2 pressed, butn will have 1 in bit 1
-    butn |= BUTN3; // if BUTN3 pressed, butn will have 1 in bit 2
-    butn |= BUTN4; // if BUTN4 pressed, butn will have 1 in bit 3
-    butn |= BUTN5; // if BUTN5 pressed, butn will have 1 in bit 4
-    butn |= BUTN6; // if BUTN6 pressed, butn will have 1 in bit 5
-    butn |= BUTN7; // if BUTN7 pressed, butn will have 1 in bit 6
-    butn |= BUTN8; // if BUTN8 pressed, butn will have 1 in bit 7
+    if (PORTBbits.RB5 == 0)
+    {
+        btn = BUTN2;
+        dly(100);
+        return 1;
+    }
+    
+    if (PORTAbits.RA0 == 0)
+    {
+       btn = BUTN3;
+        dly(100);
+        return 1;
+    }
+    
+    if (PORTAbits.RA1 == 0)
+    {
+        btn = BUTN4;
+        dly(100);
+        return 1;
+    }
+    
+    if (PORTGbits.RG0 == 0)
+    {
+        btn = BUTN5;
+        dly(100);
+        return 1;
+    }
+    
+    if (PORTGbits.RG1 == 0)
+    {
+        btn = BUTN6;
+        dly(100);
+        return 1;
+    }
+    
+    if (PORTGbits.RG2 == 0)
+    {
+        btn = BUTN7;
+        dly(100);
+        return 1;
+    }
+    
+    if (PORTGbits.RG3 == 0)
+    {
+        btn = BUTN8;
+        dly(100);
+        return 1;
+    }
+    
+    
+    return 0;
     
 }
 //
 // end butnEvent ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 
-void dly(int d) {
+void dly(int d) { // does delay in 10ths of milliseconds, so for 10ms delay d = 100
 
 	int i = 0;
 
@@ -704,18 +754,23 @@ void main(void) {
 	//if (ui != 0x1010) errfm();
 	//if (FMinit() != XS) errfm();
 	for (;;) {
+        
 		evt = butnEvent(&btn);
-		if (evt == 1) switch (btn) {
-			case BUTN1 : nextChan(TRUE); dly(750); break; //if it screws up then 750 too big for int (change d to long int in dly function)
-            case BUTN2 : nextChan(FALSE); dly(750); break;
-            case BUTN3 : ; dly(750); break;
-            case BUTN4 : ; dly(750); break;
-            case BUTN5 : ; dly(750); break;
-            case BUTN6 : ; dly(750); break;
-            case BUTN7 : ; dly(750); break;
-			case BUTN8 : errfm(); dly(750); break;
-			default : break;
-            
+        
+        if (evt == 1)
+            switch (btn)
+            {
+                case BUTN1 : nextChan(TRUE); break;
+                case BUTN2 : nextChan(FALSE); break;
+                case BUTN3 : ; break;
+                case BUTN4 : ; break;
+                case BUTN5 : ; break;
+                case BUTN6 : ; break;
+                case BUTN7 : ; break;
+                case BUTN8 : errfm(); break;
+                
+                default : break;
+            }
             
         }
         
@@ -725,11 +780,10 @@ void main(void) {
         }
         */
         
-        createDigit(8,1);
+        //createDigit(8,1);
         
-        PORTFbits.RF5 = 1;
+        //PORTFbits.RF5 = 1;
 	}
-}
 //
 // end main ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
