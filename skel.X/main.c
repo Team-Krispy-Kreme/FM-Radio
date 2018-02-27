@@ -1,4 +1,4 @@
-//
+ //
 // FILE     main.c
 // DATE     140128
 // WRITTEN  RAC
@@ -82,49 +82,19 @@ unsigned int freq;
  *			2 if button is released.
  *
  */
-unsigned char butnEvent(unsigned char *butn) {
-
-    if(PORTBbits.RB0 == 0){ //if button 1 pressed
-        *butn = BUTN1;
-        return XS;
-    }
+unsigned char butnEvent(unsigned char *butn) 
+{
+    butn = 0b00000000;
     
-    if (PORTBbits.RB5 == 0){ //button 2 pressed
-        *butn = BUTN2;
-        return XS;
-    }
+    butn |= BUTN1; // if BUTN1 pressed, butn will have 1 in bit 0
+    butn |= BUTN2; // if BUTN2 pressed, butn will have 1 in bit 1
+    butn |= BUTN3; // if BUTN3 pressed, butn will have 1 in bit 2
+    butn |= BUTN4; // if BUTN4 pressed, butn will have 1 in bit 3
+    butn |= BUTN5; // if BUTN5 pressed, butn will have 1 in bit 4
+    butn |= BUTN6; // if BUTN6 pressed, butn will have 1 in bit 5
+    butn |= BUTN7; // if BUTN7 pressed, butn will have 1 in bit 6
+    butn |= BUTN8; // if BUTN8 pressed, butn will have 1 in bit 7
     
-    if (PORTAbits.RA0 == 0){ //button 3 pressed
-        *butn = BUTN3;
-        return XS;
-    }
-    
-    if (PORTAbits.RA1 == 0){ //button 4 pressed
-        *butn = BUTN4;
-        return XS;
-    }   
-    
-    if (PORTGbits.RG0 == 0){ //button 5 pressed
-        *butn = BUTN5;
-        return XS;
-    }
-    
-    if (PORTGbits.RG1 == 0){ //button 6 pressed
-        *butn = BUTN6;
-        return XS;
-    }
-    
-    if (PORTGbits.RG2 == 0){ //button 7 pressed
-        *butn = BUTN7;
-        return XS;
-    }
-    
-    if (PORTGbits.RG3 == 0){ //button 8 pressed
-        *butn = BUTN8;
-        return XS;
-    }
-    
-    return 0;		// No changes
 }
 //
 // end butnEvent ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
