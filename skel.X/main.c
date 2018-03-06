@@ -759,11 +759,250 @@ void setVolume (int vol)
      
     if (vol == TRUE)    //Volume increased
     {
-        
+        switch (current)
+        {
+            case 0x0F00 :               //Volume 0->1
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xC000; 
+                FMwrite(14);
+                break;
+            
+            case 0xCF00 :               //Volume on 1->2
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            
+            case 0xDF00 :               //Volume on 2->3
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+                
+            case 0xFF00 :               //Volume on 3->4
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xC000;
+                FMwrite(14);
+                break;
+                
+            case 0xCB00 :               //Volume on 4->5 
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xDB00 :               //Volume on 5->6
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xFB00 :               //Volume on 6->7
+                regImg[3] |= 0x0500;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xFA00 :               //Volume on 7->8 
+                regImg[3] |= 0x0480;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF900 :               //Volume on 8->9 
+                regImg[3] |= 0x0400;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF800 :               //Volume on 9->10 
+                regImg[3] |= 0x0380;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF700 :               //Volume on 10->11 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xD600 :               //Volume on 11->12 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xE600 :               //Volume on 12->13 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF600 :               //Volume on 13->14
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xE300 :               //Volume on 14->15 
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF300 :               //Volume on 15->16 
+                regImg[3] |= 0x0100;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF200 :               //Volume on 16->17 
+                regImg[3] |= 0x0080;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 17->18 
+                regImg[3] |= 0x0000;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 18 
+                //Do nothing as volume already full
+                break;
+            
+            default : break;     
+        }
     }
     
     if (vol == FALSE)   // Volume decreased
     {
+        switch (current)
+        {
+            case 0x0F00 :               //Volume 0
+                // Do nothing as volume already low
+                break;
+            
+            case 0xCF00 :               //Volume on 1->0
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0x0000;
+                FMwrite(14);
+                break;
+            
+            case 0xDF00 :               //Volume on 2->1
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xC000; 
+                FMwrite(14);
+                break;
+                
+            case 0xFF00 :               //Volume on 3->2
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+                
+            case 0xCB00 :               //Volume on 4->3 
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xDB00 :               //Volume on 5->4
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xC000;
+                FMwrite(14);
+                break;
+            case 0xFB00 :               //Volume on 6->5
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xFA00 :               //Volume on 7->6 
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF900 :               //Volume on 8->7 
+                regImg[3] |= 0x0500;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF800 :               //Volume on 9->8 
+                regImg[3] |= 0x0480;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF700 :               //Volume on 10->9
+                regImg[3] |= 0x0400;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xD600 :               //Volume on 11->10 
+                regImg[3] |= 0x0380;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xE600 :               //Volume on 12->11 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xF600 :               //Volume on 13->12
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xE300 :               //Volume on 14->13 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF300 :               //Volume on 15->14 
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xF200 :               //Volume on 16->15 
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 17->16 
+                regImg[3] |= 0x0100;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 18->17
+                regImg[3] |= 0x0080;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            
+            default : break;     
+        }
 
             
     }
