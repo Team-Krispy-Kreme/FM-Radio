@@ -17,7 +17,7 @@
 // of the PIC and the FM tuner module.  The basics of communication
 // over the I2C bus are also covered.
 // 
-// This version contains eevisions needed to compile under MPLABX.
+// This version contains revisions needed to compile under MPLABX.
 // 
 // 
 
