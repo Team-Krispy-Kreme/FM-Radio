@@ -1,4 +1,4 @@
-//
+ //
 // FILE     main.c
 // DATE     140128
 // WRITTEN  RAC
@@ -17,7 +17,7 @@
 // of the PIC and the FM tuner module.  The basics of communication
 // over the I2C bus are also covered.
 // 
-// This version contains eevisions needed to compile under MPLABX.
+// This version contains revisions needed to compile under MPLABX.
 // 
 // 
 
@@ -77,60 +77,80 @@ unsigned int freq;
  *
  * @param butn Which button changed.  See fm.h.
  *
- * @return 	0 if no button has changed state,
- *			1 if button is pushed,
- *			2 if button is released.
+ * Returns 0 if nothing changed
+ * 
+ * Returns 1 if button pressed
+ * 
+ * Returns 2 if button released
  *
  */
-unsigned char butnEvent(unsigned char *butn) {
-
-    if(PORTBbits.RB0 == 0){ //if button 1 pressed
-        *butn = BUTN1;
-        return XS;
+unsigned char butnEvent(unsigned char *btn) 
+{
+    if (PORTBbits.RB0 == 0)
+    {
+        *btn = BUTN1;
+        dly(100);
+        return 1;
     }
     
-    if (PORTBbits.RB5 == 0){ //button 2 pressed
-        *butn = BUTN2;
-        return XS;
+    if (PORTBbits.RB5 == 0)
+    {
+        *btn = BUTN2;
+        dly(100);
+        return 1;
     }
     
-    if (PORTAbits.RA0 == 0){ //button 3 pressed
-        *butn = BUTN3;
-        return XS;
+    if (PORTAbits.RA0 == 0)
+    {
+        *btn = BUTN3;
+        dly(100);
+        return 1;
     }
     
-    if (PORTAbits.RA1 == 0){ //button 4 pressed
-        *butn = BUTN4;
-        return XS;
-    }   
-    
-    if (PORTGbits.RG0 == 0){ //button 5 pressed
-        *butn = BUTN5;
-        return XS;
+    if (PORTAbits.RA1 == 0)
+    {
+        *btn = BUTN4;
+        dly(100);
+        return 1;
     }
     
-    if (PORTGbits.RG1 == 0){ //button 6 pressed
-        *butn = BUTN6;
-        return XS;
+    if (PORTGbits.RG0 == 0)
+    {
+        *btn = BUTN5;
+        dly(100);
+        return 1;
     }
     
-    if (PORTGbits.RG2 == 0){ //button 7 pressed
-        *butn = BUTN7;
-        return XS;
+    if (PORTGbits.RG1 == 0)
+    {
+        *btn = BUTN6;
+        dly(100);
+        return 1;
     }
     
-    if (PORTGbits.RG3 == 0){ //button 8 pressed
-        *butn = BUTN8;
-        return XS;
+    if (PORTGbits.RG2 == 0)
+    {
+        *btn = BUTN7;
+        dly(100);
+        return 1;
     }
     
-    return 0;		// No changes
+    if (PORTGbits.RG3 == 0)
+    {
+        *btn = BUTN8;
+        dly(100);
+        return 1;
+    }
+    
+    
+    return 0;
+    
 }
 //
 // end butnEvent ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
 
-void dly(int d) {
+void dly(int d) { // does delay in 10ths of milliseconds, so for 10ms delay d = 100
 
 	int i = 0;
 
@@ -180,6 +200,7 @@ void Init() {
 	PORTA = 0;
 	PORTB = 0;
 	PORTC = 0;
+    PORTG = 0;
     INTCONbits.TMR0IF = 0;          // Clear timer flag
 	//T0CON = 0b00000011;				// Prescale by 16
     T0CON = 0b00001000;             // No prescale
@@ -245,7 +266,7 @@ unsigned char FMwrite(unsigned char adr) {
 	// Send slave address of the chip onto the bus
 	if (WriteI2C(FMI2CADR)) return XF;
 	IdleI2C();
-	WriteI2C(adr);				// Adress the internal register
+	WriteI2C(adr);				// Address the internal register
 	IdleI2C();
 	WriteI2C(firstByt);			// Ask for write to FM chip
 	IdleI2C();
@@ -284,7 +305,7 @@ unsigned char FMread(unsigned char regAddr, unsigned int *data) {
 	// Send address of the chip onto the bus
 	if (WriteI2C(FMI2CADR)) return XF;	
 	IdleI2C();
-	WriteI2C(regAddr);			// Adress the internal register
+	WriteI2C(regAddr);			// Address the internal register
 	IdleI2C();
 	RestartI2C();				// Initiate a RESTART command
 	IdleI2C();
@@ -720,6 +741,272 @@ void createDigit(unsigned int digit, unsigned char seg){
     }
 }
 
+void setVolume (int vol)
+{
+
+    int a;
+    
+    unsigned int current1, current2, current;
+    
+    
+    current1 = (regImg[3]&FMASKVOL1) << 1;
+    current2 = (regImg[14]&FMASKVOL2);
+    
+    current = (current1 & current2);
+    
+
+     
+    if (vol == TRUE)    //Volume increased
+    {
+        switch (current)
+        {
+            case 0x0F00 :               //Volume 0->1
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xC000; 
+                FMwrite(14);
+                break;
+            
+            case 0xCF00 :               //Volume on 1->2
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            
+            case 0xDF00 :               //Volume on 2->3
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+                
+            case 0xFF00 :               //Volume on 3->4
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xC000;
+                FMwrite(14);
+                break;
+                
+            case 0xCB00 :               //Volume on 4->5 
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xDB00 :               //Volume on 5->6
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xFB00 :               //Volume on 6->7
+                regImg[3] |= 0x0500;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xFA00 :               //Volume on 7->8 
+                regImg[3] |= 0x0480;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF900 :               //Volume on 8->9 
+                regImg[3] |= 0x0400;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF800 :               //Volume on 9->10 
+                regImg[3] |= 0x0380;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF700 :               //Volume on 10->11 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xD600 :               //Volume on 11->12 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xE600 :               //Volume on 12->13 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF600 :               //Volume on 13->14
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xE300 :               //Volume on 14->15 
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF300 :               //Volume on 15->16 
+                regImg[3] |= 0x0100;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF200 :               //Volume on 16->17 
+                regImg[3] |= 0x0080;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 17->18 
+                regImg[3] |= 0x0000;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 18 
+                //Do nothing as volume already full
+                break;
+            
+            default : break;     
+        }
+    }
+    
+    if (vol == FALSE)   // Volume decreased
+    {
+        switch (current)
+        {
+            case 0x0F00 :               //Volume 0
+                // Do nothing as volume already low
+                break;
+            
+            case 0xCF00 :               //Volume on 1->0
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0x0000;
+                FMwrite(14);
+                break;
+            
+            case 0xDF00 :               //Volume on 2->1
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xC000; 
+                FMwrite(14);
+                break;
+                
+            case 0xFF00 :               //Volume on 3->2
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+                
+            case 0xCB00 :               //Volume on 4->3 
+                regImg[3] |= 0x0780;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xDB00 :               //Volume on 5->4
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xC000;
+                FMwrite(14);
+                break;
+            case 0xFB00 :               //Volume on 6->5
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xFA00 :               //Volume on 7->6 
+                regImg[3] |= 0x0580;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF900 :               //Volume on 8->7 
+                regImg[3] |= 0x0500;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF800 :               //Volume on 9->8 
+                regImg[3] |= 0x0480;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF700 :               //Volume on 10->9
+                regImg[3] |= 0x0400;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xD600 :               //Volume on 11->10 
+                regImg[3] |= 0x0380;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xE600 :               //Volume on 12->11 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xD000;
+                FMwrite(14);
+                break;
+            case 0xF600 :               //Volume on 13->12
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xE300 :               //Volume on 14->13 
+                regImg[3] |= 0x0300;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF300 :               //Volume on 15->14 
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xE000;
+                FMwrite(14);
+                break;
+            case 0xF200 :               //Volume on 16->15 
+                regImg[3] |= 0x0180;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 17->16 
+                regImg[3] |= 0x0100;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            case 0xF100 :               //Volume on 18->17
+                regImg[3] |= 0x0080;
+                FMwrite(3);
+                regImg[14] |= 0xF000;
+                FMwrite(14);
+                break;
+            
+            default : break;     
+        }
+
+            
+    }
+}
+
 
 void main(void) {
 
@@ -733,18 +1020,23 @@ void main(void) {
 	//if (ui != 0x1010) errfm();
 	//if (FMinit() != XS) errfm();
 	for (;;) {
+        
 		evt = butnEvent(&btn);
-		if (evt == 1) switch (btn) {
-			case BUTN1 : nextChan(TRUE); dly(750); break; //if it screws up then 750 too big for int (change d to long int in dly function)
-            case BUTN2 : nextChan(FALSE); dly(750); break;
-            case BUTN3 : ; dly(750); break;
-            case BUTN4 : ; dly(750); break;
-            case BUTN5 : ; dly(750); break;
-            case BUTN6 : ; dly(750); break;
-            case BUTN7 : ; dly(750); break;
-			case BUTN8 : errfm(); dly(750); break;
-			default : break;
-            
+        
+        if (evt == 1)
+            switch (btn)
+            {
+                case BUTN1 : nextChan(TRUE); break;
+                case BUTN2 : nextChan(FALSE); break;
+                case BUTN3 : ; break;
+                case BUTN4 : ; break;
+                case BUTN5 : setVolume(TRUE); break;
+                case BUTN6 : setVolume(FALSE); break;
+                case BUTN7 : ; break;
+                case BUTN8 : errfm(); break;
+                
+                default : break;
+            }
             
         }
         
@@ -754,11 +1046,10 @@ void main(void) {
         }
         */
         
-        createDigit(8,1);
+        //createDigit(8,1);
         
-        PORTFbits.RF5 = 1;
+        //PORTFbits.RF5 = 1;
 	}
-}
 //
 // end main ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //
