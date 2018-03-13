@@ -514,12 +514,21 @@ unsigned char nextChan(unsigned char up) {
  */
 unsigned char scanNext(unsigned char up){
     
-    if(up){
-        
-    }else if(!up){
-        
+    mute(TRUE);
+    regImg[2] &= ~FMASKTUNE;
+    if (FMwrite(2) != XS) return XF;
+    regImg[3] &= ~FMASKSEEK;
+    if (FMwrite(3) != XS) return XF;
+    if (up) regImg[3] |= FMASKSEEKUP; else regImg[3] &= ~FMASKSEEKUP;
+    
+    regImg[3] |= FMASKSEEK;
+    if (FMwrite(3) != XS) return XF;
+    for(unsigned int STC;!STC;dly(10)){
+        FMread(FMCHIPSTSADR,&STC);
+        STC &= FMASKSTATUS;
     }
-    return XF;
+    mute(FALSE);
+    return XS;
     
 }
 
@@ -1005,9 +1014,6 @@ void setVolume (int vol)
     }
 }
 
-unsigned char scan(char dir){
-    
-}
 
 
 void main(void) {
@@ -1030,8 +1036,8 @@ void main(void) {
             {
                 case BUTN1 : nextChan(TRUE); break;
                 case BUTN2 : nextChan(FALSE); break;
-                case BUTN3 : ; break;
-                case BUTN4 : ; break;
+                case BUTN3 : scanNext(TRUE); break;
+                case BUTN4 : scanNext(FALSE); break;
                 case BUTN5 : setVolume(TRUE); break;
                 case BUTN6 : setVolume(FALSE); break;
                 case BUTN7 : ; break;
