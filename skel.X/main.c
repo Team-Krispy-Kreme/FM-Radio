@@ -758,8 +758,7 @@ void setVolume (int vol)
      
     if (vol == TRUE)    //Volume increased
     {
-        switch (current)
-        {
+        switch(current){
             case 0x0F00 :               //Volume 0->1
                 regImg[3] |= 0x0780;
                 FMwrite(3);
@@ -872,7 +871,7 @@ void setVolume (int vol)
                 regImg[14] |= 0xF000;
                 FMwrite(14);
                 break;
-            case 0xF100 :               //Volume on 18 
+            case 0xF000 :               //Volume on 18 
                 //Do nothing as volume already full
                 break;
             
@@ -882,8 +881,7 @@ void setVolume (int vol)
     
     if (vol == FALSE)   // Volume decreased
     {
-        switch (current)
-        {
+        switch(current){
             case 0x0F00 :               //Volume 0
                 // Do nothing as volume already low
                 break;
@@ -993,7 +991,7 @@ void setVolume (int vol)
                 regImg[14] |= 0xF000;
                 FMwrite(14);
                 break;
-            case 0xF100 :               //Volume on 18->17
+            case 0xF000 :               //Volume on 18->17
                 regImg[3] |= 0x0080;
                 FMwrite(3);
                 regImg[14] |= 0xF000;
@@ -1005,6 +1003,10 @@ void setVolume (int vol)
 
             
     }
+}
+
+unsigned char scan(char dir){
+    
 }
 
 
@@ -1037,8 +1039,10 @@ void main(void) {
                 
                 default : break;
             }
-            
+            showFreq(freq);
         }
+    
+    
         
         /*int x;
         for(x = 0; x < 23;x++){
