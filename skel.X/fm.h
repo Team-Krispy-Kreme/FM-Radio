@@ -40,7 +40,10 @@
 #define FMASKTUNE		0x0200		// Register 2, bit 9
 #define FMASKSTATUS		0x0020		// Register 0x13, bit 5
 #define FMASKSEEK		0x4000		// Register 3, bit 14
-#define FMASKRDCHAN		0xFF80		// Register 2, channel number bits
+#define FMASKSEEKUP     0x8000
+#define FMASKRDCHAN		0xFF80
+#define FMASKVOL1		0x0780
+#define FMASKVOL2		0xF000// Register 2, channel number bits
 
 #define BUTN1			0b00000001	// Button number one
 #define BUTN2			0b00000010	// Button number two
